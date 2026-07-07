@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+{% block title %}Admins & Roles{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Admins &amp; Roles</h1>
+  <p class="muted">Create support agents and control what they can access</p>
+</div>
+
+<div class="card">
+  <h3>Add Team Member</h3>
+  <div class="form-grid">
+    <div><label>Name</label><input type="text" id="newAdminName"></div>
+    <div><label>Email</label><input type="email" id="newAdminEmail"></div>
+    <div><label>Password</label><input type="text" id="newAdminPassword" placeholder="changeme123"></div>
+    <div>
+      <label>Role</label>
+      <select id="newAdminRole">
+        {% for r in roles %}
+        <option value="{{ r.id }}">{{ r.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <button class="btn-primary" id="btnAddAdmin">Add Team Member</button>
+</div>
+
+<div class="card">
+  <h3>Team</h3>
+  <table class="data-table">
+    <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Active</th><th>Online</th><th></th></tr></thead>
+    <tbody id="adminsTbody">
+      {% for a in admins %}
+      <tr data-id="{{ a.id }}">
+        <td>{{ a.name }}</td>
+        <td>{{ a.email }}</td>
+        <td>
+          <select class="role-select" data-id="{{ a.id }}">
+            {% for r in roles %}
+            <option value="{{ r.id }}" {{ 'selected' if a.role_id==r.id }}>{{ r.name }}</option>
+            {% endfor %}
+          </select>
+        </td>
+        <td>{{ '✅' if a.is_active_agent else '⛔' }}</td>
+        <td>{{ '🟢' if a.is_online else '⚪' }}</td>
+        <td><button class="btn-small btn-danger btn-delete-admin" data-id="{{ a.id }}">Remove</button></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Role Permissions</h3>
+  <p class="muted">Owner: full access · Admin: everything except managing admins · Manager: inbox + visitors + FAQ/canned · Support Agent: inbox reply only</p>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='admin/js/admins.js') }}"></script>
+{% endblock %}

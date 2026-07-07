@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+{% block title %}Inbox{% endblock %}
+
+{% block content %}
+<div class="inbox-layout">
+
+  <div class="conv-list">
+    <div class="conv-list-header">
+      <input type="text" id="convSearch" placeholder="🔍 Search visitor, mobile, ID…">
+      <select id="convStatusFilter">
+        <option value="open">Open</option>
+        <option value="closed">Closed</option>
+        <option value="archived">Archived</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+    <div id="convItems" class="conv-items"></div>
+  </div>
+
+  <div class="chat-panel">
+    <div id="chatEmptyState" class="chat-empty">Select a conversation to start replying</div>
+
+    <div id="chatActive" class="chat-active" style="display:none;">
+      <div class="chat-active-header">
+        <div>
+          <div class="chat-active-name" id="chatVisitorName">–</div>
+          <div class="chat-active-status" id="chatVisitorStatus">–</div>
+        </div>
+        <div class="chat-active-actions">
+          <select id="assignSelect"></select>
+          <button id="btnCloseChat" class="btn-small">Close</button>
+          <button id="btnArchiveChat" class="btn-small">Archive</button>
+          <button id="btnBlockVisitor" class="btn-small btn-danger">Block</button>
+          <button id="btnExportCsv" class="btn-small">Export CSV</button>
+          <button id="btnExportPdf" class="btn-small">Export PDF</button>
+        </div>
+      </div>
+
+      <div id="messagesContainer" class="messages-container"></div>
+      <div id="typingIndicator" class="typing-indicator" style="display:none;">Visitor is typing…</div>
+
+      <div class="composer">
+        <input type="text" id="messageInput" placeholder="Type a message… use /shortcut for canned replies">
+        <div id="cannedSuggestions" class="canned-suggestions" style="display:none;"></div>
+        <button id="btnSend" class="btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="visitor-panel" id="visitorPanel">
+    <div class="chat-empty">Visitor details will appear here</div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='admin/js/inbox.js') }}"></script>
+{% endblock %}

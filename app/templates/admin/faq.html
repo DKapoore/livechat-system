@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% block title %}FAQ{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>FAQ System</h1>
+  <p class="muted">These appear as quick-reply buttons in the chat widget</p>
+</div>
+
+<div class="card">
+  <h3>Add FAQ</h3>
+  <div class="form-grid">
+    <div><label>Question (button label)</label><input type="text" id="faqQuestion" placeholder="e.g. Pricing"></div>
+    <div><label>Category</label><input type="text" id="faqCategory" placeholder="General"></div>
+    <div class="full"><label>Answer (auto-sent when clicked)</label><textarea id="faqAnswer"></textarea></div>
+  </div>
+  <button class="btn-primary" id="btnAddFaq">Add FAQ</button>
+</div>
+
+<div class="card">
+  <h3>Existing FAQs</h3>
+  <table class="data-table">
+    <thead><tr><th>Question</th><th>Category</th><th>Answer</th><th>Active</th><th></th></tr></thead>
+    <tbody id="faqTbody">
+      {% for f in faqs %}
+      <tr data-id="{{ f.id }}">
+        <td>{{ f.question }}</td>
+        <td>{{ f.category }}</td>
+        <td class="truncate">{{ f.answer }}</td>
+        <td>{{ '✅' if f.is_active else '⛔' }}</td>
+        <td><button class="btn-small btn-danger btn-delete-faq" data-id="{{ f.id }}">Delete</button></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='admin/js/faq.js') }}"></script>
+{% endblock %}
