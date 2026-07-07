@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat Widget Demo</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        body{
+            background:#f4f7fb;
+            color:#333;
+        }
+
+        header{
+            background:#2563eb;
+            color:#fff;
+            padding:20px;
+            text-align:center;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:40px auto;
+            padding:20px;
+        }
+
+        .card{
+            background:#fff;
+            border-radius:12px;
+            padding:30px;
+            box-shadow:0 5px 20px rgba(0,0,0,.08);
+        }
+
+        h2{
+            margin-bottom:15px;
+        }
+
+        p{
+            line-height:1.7;
+            margin-bottom:15px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 25px;
+            background:#2563eb;
+            color:#fff;
+            text-decoration:none;
+            border-radius:8px;
+        }
+
+        footer{
+            margin-top:60px;
+            padding:20px;
+            text-align:center;
+            color:#666;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Live Chat Widget Demo</h1>
+    <p>Floating Chat Widget Integration Example</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Welcome</h2>
+
+        <p>
+            This is a sample HTML page demonstrating the Live Chat Widget.
+            The widget should automatically appear as a floating chat button
+            in the bottom-right corner after the JavaScript loads.
+        </p>
+
+        <p>
+            Replace the API key with your own when using this on production websites.
+        </p>
+
+        <a href="#" class="btn">Sample Button</a>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Live Chat Demo
+</footer>
+
+<!-- Live Chat Widget -->
+<script src="http://livechat-system.onrender.com/widget.js"></script>
+<script>
+    LiveChat.init({
+        apiKey: "demo-api-key-123"
+    });
+</script>
+
+</body>
+</html>
